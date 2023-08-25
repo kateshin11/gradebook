@@ -1,0 +1,40 @@
+
+
+-- command: mysql --local-infile=1 -u root -p
+
+CREATE TABLE gradebook (
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    total_earned INT,
+    total_possible INT,
+    grade_1_1_2 INT,
+    grade_1_2_4 INT,
+    grade_1_2_5 INT,
+    grade_1_3_4 INT,
+    grade_1_3_5 INT,
+    grade_1_4_4 INT,
+    grade_1_4_5 INT,
+    grade_1_5_4 INT,
+    grade_1_5_5 INT,
+    grade_1_5_6 INT,
+    grade_1_6_4 INT,
+    grade_1_7_4 INT,
+    grade_1_7_5 INT,
+    grade_1_8_4 INT,
+    grade_1_8_5 INT
+);
+
+
+LOAD DATA LOCAL INFILE '/Users/kateshin/Documents/Personal/2023/Seoul Aacdemy/General/Grade Table/p5grade.csv'
+INTO TABLE gradebook
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+ALTER TABLE gradebook
+ADD passcode INT CHECK (passcode >= 1000 AND passcode <= 9999);
+
+UPDATE gradebook
+SET passcode = 1234
+WHERE first_name = 'Catherine' 
